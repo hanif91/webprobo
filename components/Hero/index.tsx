@@ -1,49 +1,71 @@
 import Image from "next/image";
 import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button"
 
 const Hero = () => {
   return (
     <>
       <section
         id="home"
+        className="relative z-10 overflow-auto pt-[120px] pb-5 md:pt-[150px] md:pb-[25px] xl:pt-[180px] xl:pb-[25px] 2xl:pt-[210px] 2xl:pb-[25px]"
       >
+        <Image
+                  src="/images/hero/water-g.svg"
+                  alt=""
+                  className="absolute md:pb-[25]  lg:pb-[25]  top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-3/4  opacity-50"
+                  width={300}
+                  height={300}
+        ></Image> 
+        
+        {/* <div className="bg-water bg-[length:500px_250px] bg-center bg-no-repeat"> */}
         <div className="container">
-          <div className="bg-none from-purple-400 to w-full h-auto bg-cover bg-center relative">
-            <div  className="items-center">
-              {/* <img src="/images/hero/water.png" alt="" className="h-200 w-full opacity-20  object-cover absolute  mix-blend-overlay"/> */}
-              <Image
-                src="/images/hero/water.png" alt=""
-                className="h-13 w-full opacity-95  object-cover absolute  mix-blend-overlay"
-                width={500}
-                height={30}
+            <div className="-mx-4 flex flex-wrap">
+  
+              
+              <div className="w-full px-4 justify-center">
+                <div
+                  className="wow fadeInUp mx-auto max-w-[800px] text-center "
+                  data-wow-delay=".2s"
                 >
+                  <h1 className="mb-5 text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight">
+                  Pelayanan Air Bersih Untuk Masyarakat Kota Probolinggo
+                  </h1>
+                  <p className="mb-12 text-base font-medium !leading-relaxed text-gray-700 dark:text-white dark:opacity-90 sm:text-lg md:text-xl">
+                    Air Kami di olah langsung dari Sumber Mata Air terbaik di Kota Probolinggo yaitu Sumber Mata Air 
+                    <span className="font-extrabold text-2xl text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600"> Ronggojalu. </span> Cek hasil tes Laboratorium air kami  
+                    
+                    <Link
+                      href="/"
 
-              </Image>
+                      className={buttonVariants({ variant: "link" })}
+                    >
+                    <span className="font-extrabold  text-2xl text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Disini</span> 
+                    </Link>
+                  </p>
 
+                  <p className="mb-12 text-base font-medium !leading-relaxed text-gray-700 dark:text-white dark:opacity-90 sm:text-lg md:text-xl">
+                    Cocok Untuk Kebutuhan Sehari - Hari atau Untuk Wira Usaha 
+                  </p>
+                  
+                </div>
+        
+              </div>
+
+
+      
             </div>
-            
-            <div className="p-24">
-              <h1>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis consequatur enim quidem eos nesciunt officiis repellat quos voluptatem, sit est praesentium placeat veritatis deleniti nulla voluptas. Sequi excepturi reprehenderit quisquam.
-              </h1>
-              <h2>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis consequatur enim quidem eos nesciunt officiis repellat quos voluptatem, sit est praesentium placeat veritatis deleniti nulla voluptas. Sequi excepturi reprehenderit quisquam.
-              </h2>
-            </div>
-
-
-          </div>
- 
-     
-
         </div>
-        <div className="absolute top-0 right-0 z-[-1] opacity-30 lg:opacity-100">
+
+        {/* </div> */}
+
+        {/* <div className="absolute top-0 right-0 z-[-1] opacity-30 lg:opacity-100"> */}
           <svg
-            width="450"
-            height="556"
+            className="absolute xs:w-[300px] xs:h-[350px] md:w-[350px] md:h-[420px] lg:w-[380px] lg:h-[430px] xl:w-[450px] xl:h-[500px] top-0 right-0 z-[-1] opacity-30 lg:opacity-100"
+            // width="450"
+            // height=""
             viewBox="0 0 450 556"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+
           >
             <circle
               cx="277"
@@ -174,8 +196,8 @@ const Hero = () => {
               </linearGradient>
             </defs>
           </svg>
-        </div>
-        <div className="absolute bottom-0 left-0 z-[-1] opacity-30 lg:opacity-100">
+        {/* </div> */}
+        <div className="absolute  bottom-0 left-0 z-[-1] opacity-30 lg:opacity-100">
           <svg
             width="364"
             height="201"
@@ -278,8 +300,6 @@ const Hero = () => {
             </defs>
           </svg>
         </div>
-  
-        
       </section>
     </>
   );

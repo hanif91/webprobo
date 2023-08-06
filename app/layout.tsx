@@ -3,6 +3,11 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Header from '@/components/header/header'
+import ScrollToTop from '@/components/ScrollToTop'
+import Footer from '@/components/Footer'
+import { ClerkProvider } from '@clerk/nextjs'
+import { ClerkLoaded, ClerkLoading } from '@clerk/nextjs'
+import ClerkLoad from '@/components/Loading/ClerkLoad'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,14 +22,32 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
+    <ClerkProvider>
     <html lang="en">
-      <body className="dark:bg-black">
-        <ThemeProvider>
-          <Header/>
-          {children}
-        </ThemeProvider>
 
+      <body className="dark:bg-black ">
+      <ThemeProvider>
+        <ClerkLoading >
+          <ClerkLoad/>
+    
+    
+        </ClerkLoading>
+        <ClerkLoaded>
+     
+            <Header/>
+            {children}
+                
+            <ClerkLoad 
+            />
+            <Footer />
+            <ScrollToTop />
+        
+        </ClerkLoaded>
+      </ThemeProvider>
       </body>
+
     </html>
+
+    </ClerkProvider>
   )
 }

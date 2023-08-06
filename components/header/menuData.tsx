@@ -9,76 +9,77 @@ const menuData: Menu[] = [
   },
   {
     id: 2,
-    title: "About",
-    path: "/about",
-    newTab: false,
-  },
-  {
-    id: 33,
-    title: "Blog",
-    path: "/blog",
-    newTab: false,
-  },
-  {
-    id: 3,
-    title: "Support",
-    path: "/contact",
-    newTab: false,
-  },
-  {
-    id: 4,
-    title: "Pages",
+    title: "Profile",
     newTab: false,
     submenu: [
       {
-        id: 41,
-        title: "About Page",
+        id: 21,
+        title: "Tentang Kami",
         path: "/about",
         newTab: false,
       },
       {
-        id: 42,
-        title: "Contact Page",
-        path: "/contact",
+        id: 22,
+        title: "Struktur Organisasi",
+        path: "/",
+        newTab: false,
+      }
+    ]
+  },
+  {
+    id: 33,
+    title: "Pelayanan",
+    newTab: false,
+    submenu: [
+      {
+        id: 31,
+        title: "Pasang Baru",
+        path: "/about",
         newTab: false,
       },
       {
-        id: 43,
-        title: "Blog Grid Page",
-        path: "/blog",
+        id: 32,
+        title: "Pengaduan Pelanggan",
+        path: "/",
         newTab: false,
       },
       {
-        id: 44,
-        title: "Blog Sidebar Page",
-        path: "/blog-sidebar",
+        id: 33,
+        title: "Pengaduan Non Pelanggan",
+        path: "/",
         newTab: false,
       },
       {
-        id: 45,
-        title: "Blog Details Page",
-        path: "/blog-details",
+        id: 34,
+        title: "Cek Tagihan",
+        path: "/",
         newTab: false,
       },
       {
-        id: 46,
-        title: "Sign In Page",
-        path: "/signin",
+        id: 35,
+        title: "Bacameter Mandiri",
+        path: "/",
         newTab: false,
-      },
-      {
-        id: 47,
-        title: "Sign Up Page",
-        path: "/signup",
-        newTab: false,
-      },
-      {
-        id: 48,
-        title: "Error Page",
-        path: "/error",
-        newTab: false,
-      },
-    ],
+      }
+    ]
+  },
+  {
+    id: 4,
+    title: "Berita",
+    path: "/",
+    newTab: false,
+  },
+  {
+    id: 5,
+    title: "Dokumen Publik",
+    path: "/",
+    newTab: false,
+  },
+  {
+    id: 6,
+    title: "Kontak Kami",
+    path: "/",
+    newTab: false,
   },
 ];
 export default menuData;
