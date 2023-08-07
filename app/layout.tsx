@@ -8,6 +8,7 @@ import Footer from '@/components/Footer'
 import { ClerkProvider } from '@clerk/nextjs'
 import { ClerkLoaded, ClerkLoading } from '@clerk/nextjs'
 import ClerkLoad from '@/components/Loading/ClerkLoad'
+import { ToasterProvider } from '@/providers/toast-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,6 +28,7 @@ export default function RootLayout({
 
       <body className="dark:bg-black ">
       <ThemeProvider>
+      <ToasterProvider/>
         <ClerkLoading >
           <ClerkLoad/>
     
@@ -43,6 +45,7 @@ export default function RootLayout({
             <ScrollToTop />
         
         </ClerkLoaded>
+
       </ThemeProvider>
       </body>
 

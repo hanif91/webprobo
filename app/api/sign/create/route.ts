@@ -19,36 +19,55 @@ export async function POST(
     //  redirect('/login')
      
     // const { userId } = auth();
+
+    // if (!userId) {
+    //   return new NextResponse("Unauthorized", { status : 401 })
+    // }
+
     console.log("1")
+
     const body = await req.json();
+    console.log(body)
     const dataPost = body;
 
+    console.log(body)
 
     if (!dataPost) {
 
       return new NextResponse("Data Body kosong", { status : 400 })
     }
-
-    console.log("test masuk");
-    const user = await prismadb.user.create({
-      data : {
-        id : dataPost?.id,
-        email : dataPost?.email,
-        profile : {
-          create : {
-            name : dataPost?.name,
-            nohp : dataPost?.nohp,
-            imageUrl : dataPost?.imageUrl
-          },
-        }
+ 
+    const userCheck = await prismadb.user.findFirst({
+      where : {
+          id : dataPost?.id,
       }
     });
+  
+    if (!userCheck) {
+      console.log("test masuk");
+      const user = await prismadb.user.create({
+        data : {
+          id : dataPost?.id,
+          email : dataPost.email,
+          profile : {
+            create : {
+              name : dataPost?.name,
+              nohp : dataPost?.nohp,
+              imageUrl : dataPost?.imageUrl
+            },
+          }
+        }
+      });
+      console.log(user);
+      return NextResponse.json(user);
+    }
 
-    console.log(user);
-    return NextResponse.json(user);
+
+    return NextResponse.json(userCheck);
+   
 
   } catch (error) {
-    console.log('[STORES_POST]',error);
-    return new NextResponse("Internal Error", { status : 500 })
+    //console.log('[STORES_POST]',error);
+    return new NextResponse(`Internal Error ${error}`, { status : 500 })
   }
 }
