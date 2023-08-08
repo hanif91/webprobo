@@ -107,25 +107,12 @@ const Header = () => {
                   }`}
                 >
                   {/* Button Collaps , Login */}
-                  <div className="flex items-center justify-center">
-                 
-
-                 </div>   
-                  <ul className="block lg:flex lg:space-x-5">
-                  <UserButton afterSignOutUrl='/'/>
        
-
-                    <SignedOut>
-                    <Link
-                      href="/sign-in"
-                      className="ease-in-out duration-300  lg:hidden
-                      rounded-xl bg-primary2
-                      py-3 px-8 text-sm font-bold text-white text-center transition hover:bg-opacity-90 hover:shadow-signUp md:block md:px-9 lg:px-6 xl:px-9"
-                    >
-                      Sign In
-                    </Link>
-                    </SignedOut>
-
+                  <ul className="block lg:flex lg:space-x-5">
+       
+       
+  
+      
                     {/* sub menu Toggle */}
                     {menuData.map((menuItem, index) => (
                       <li key={menuItem.id} className="group relative">
@@ -173,6 +160,21 @@ const Header = () => {
                         )}
                       </li>
                     ))}
+
+                      <div className="flex items-center justify-center">
+                        <SignedOut>
+                        <Link
+                          href="/sign-in"
+                          className="ease-in-out duration-300  lg:hidden
+                          rounded-xl bg-primary2
+                          py-2 px-16 mt-3 mb-1 text-sm font-bold text-white text-center transition hover:bg-opacity-90 hover:shadow-signUp md:block md:px-9 lg:px-6 xl:px-9"
+                        >
+                          Sign In
+                        </Link>
+                        </SignedOut>
+        
+
+                    </div> 
                   </ul>
                 </nav>
               </div>
