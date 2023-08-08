@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@/components/theme-provider"
+
 // import { ModeToggle } from '@components/ModeToggle'
 
 

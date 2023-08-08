@@ -26,13 +26,10 @@ export async function POST(
     //   return new NextResponse("Unauthorized", { status : 401 })
     // }
 
-    console.log("1")
+
 
     const body = await req.json();
-    console.log(body)
     const dataPost = body;
-
-    console.log(body)
 
     if (!dataPost) {
 
@@ -46,7 +43,7 @@ export async function POST(
     });
   
     if (!userCheck) {
-      console.log("test masuk");
+       console.log(" Masuk User Cek");
       const user = await prismadb.user.create({
         data : {
           id : dataPost?.id,
