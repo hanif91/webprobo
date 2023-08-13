@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
 import { UserButton,SignedOut, SignInButton } from "@clerk/nextjs";
+import { usePathname } from 'next/navigation'
+import { useAuth } from "@clerk/nextjs";
 
 
 const Header = () => {
@@ -13,6 +15,8 @@ const Header = () => {
   const navbarToggleHandler = () => {
     setNavbarOpen(!navbarOpen);
   };
+
+  const { userId } = useAuth();
 
   // Sticky Navbar
   const [sticky, setSticky] = useState(false);
@@ -23,9 +27,6 @@ const Header = () => {
       setSticky(false);
     }
   };
-  useEffect(() => {
-    window.addEventListener("scroll", handleStickyNavbar);
-  });
 
   // submenu handler
   const [openIndex, setOpenIndex] = useState(-1);
@@ -37,10 +38,34 @@ const Header = () => {
     }
   };
 
+  const pathname = usePathname()
+
+  const [headerVisible, setheaderVisible] = useState(false);
+  const [breadc, setBreadc] = useState(false);
+  useEffect(() => {
+    window.addEventListener("scroll", handleStickyNavbar);
+
+    if(pathname === "/sign-in" || pathname === "/sign-up") {
+      setheaderVisible(true)
+    } else {
+      setheaderVisible(false)
+    }
+
+    if(pathname === "/" || pathname === `/${userId}`) {
+      setBreadc(true)
+    } else {
+      setBreadc(false)
+    }
+
+  },[pathname]);
+  
+
   return (
     <>
+
       <header
-        className={`header top-0 left-0 z-40 flex w-full items-center bg-transparent ${
+        className={`header top-0 left-0 z-40 flex w-full items-center bg-transparent ${headerVisible ? "hidden" : "block"} 
+        ${
           sticky
             ? "!fixed !z-[9999] !bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm !transition dark:!bg-primary2 dark:!bg-opacity-20"
             : "absolute"
@@ -119,6 +144,7 @@ const Header = () => {
                         {menuItem.path ? (
                           <Link
                             href={menuItem.path}
+                            onClick={navbarToggleHandler}
                             className={`flex py-2 text-base text-dark group-hover:opacity-70 dark:text-white lg:mr-0 lg:inline-flex lg:py-6 lg:px-0`}
                           >
                             {menuItem.title}
@@ -148,8 +174,9 @@ const Header = () => {
 
                               {menuItem.submenu?.map((submenuItem) => (
                                 <Link
-                                  href={submenuItem.path ? "#" : "#"}
+                                  href={submenuItem.path ? submenuItem.path : "#"}
                                   key={submenuItem.id}
+                                  onClick={navbarToggleHandler}
                                   className="block rounded py-1 text-sm pl-2.5 text-dark hover:opacity-70 dark:text-white lg:px-3"
                                 >
                                   {submenuItem.title}
@@ -163,14 +190,17 @@ const Header = () => {
 
                       <div className="flex items-center justify-center">
                         <SignedOut>
-                        <Link
-                          href="/sign-in"
-                          className="ease-in-out duration-300  lg:hidden
-                          rounded-xl bg-primary2
-                          py-2 px-16 mt-3 mb-1 text-sm font-bold text-white text-center transition hover:bg-opacity-90 hover:shadow-signUp md:block md:px-9 lg:px-6 xl:px-9"
-                        >
-                          Sign In
-                        </Link>
+                          <SignInButton mode="modal">
+                            <Link
+                              href="#"
+                              onClick={navbarToggleHandler}
+                              className="ease-in-out duration-300  lg:hidden
+                              rounded-xl bg-primary2
+                              py-2 px-16 mt-3 mb-1 text-sm font-bold text-white text-center transition hover:bg-opacity-90 hover:shadow-signUp md:block md:px-9 lg:px-6 xl:px-9"
+                            >
+                              Sign In
+                            </Link>
+                          </SignInButton>
                         </SignedOut>
         
 
@@ -180,13 +210,18 @@ const Header = () => {
               </div>
               <div className="flex   items-center justify-end pr-16 lg:pr-0">
       
-                 <UserButton afterSignOutUrl='/'/>
-                
+                 <UserButton 
+                  userProfileMode="navigation"
+                  afterSignOutUrl='/'
+                  userProfileUrl={`/${userId}/profile`}
+                 />
+        
                 
                 <SignedOut>
                     <SignInButton mode="modal">
                       <Link
-                        href=""
+                        href="#"
+             
                         className="hidden ease-in-out duration-300 
                         rounded-xl bg-primary2
                         py-3 px-8 text-sm font-bold text-white transition hover:bg-opacity-90 hover:shadow-signUp lg:block md:px-9 lg:px-6 xl:px-9"
@@ -202,7 +237,47 @@ const Header = () => {
               </div>
             </div>
           </div>
+
+          <div className={`relative -mx-4 flex items-center justify-start ${breadc ? "hidden" : "block"}`}>  
+
+            <div className="bg-gray-200 dark:bg-primary2/10 p-4 flex items-center flex-wrap w-full">
+              <ul className="flex items-center">
+              <li className="inline-flex items-center ">
+                <a href="#" className="text-gray-600 hover:text-blue-500">
+                <svg className="w-5 h-auto fill-current mx-2 text-gray-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z"/></svg>
+                </a>
+
+                <span className="mx-4 h-auto text-gray-400 font-medium">/</span>
+              </li>
+
+              <li className="inline-flex items-center">
+                <a href="#" className="text-gray-200 hover:text-blue-500">
+                Page 1
+                </a>
+
+                <span className="mx-4 h-auto text-gray-400 font-medium">/</span>
+              </li>
+
+              <li className="inline-flex items-center">
+                <a href="#" className="text-gray-600 hover:text-blue-500">
+                Page 2
+                </a>
+
+                <span className="mx-4 h-auto text-gray-400 font-medium">/</span>
+              </li>
+
+              <li className="inline-flex items-center">
+                <a href="#" className="text-gray-600 hover:text-blue-500 text-blue-500">
+                Page 3
+                </a>
+              </li>
+              </ul>
+            </div>
+          </div>
         </div>
+
+
+
       </header>
     </>
   );

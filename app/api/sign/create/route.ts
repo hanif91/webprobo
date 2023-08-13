@@ -57,12 +57,12 @@ export async function POST(
           }
         }
       });
-      console.log(user);
-      return NextResponse.json(user);
+      // console.log(user);
+      return NextResponse.json(user, {status : 200, statusText : "OK"});
     }
 
 
-    return NextResponse.json(userCheck);
+    return NextResponse.json(userCheck,{status : 210, statusText : "OK"});
    
 
   } catch (error) {

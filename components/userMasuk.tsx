@@ -3,15 +3,16 @@
 import { PostDataUprofile } from "@/types/userProfile";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { useEffect,useState } from "react";
-import { auth } from "@clerk/nextjs";
+import { useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import type { UserResource } from '@clerk/types';
+import { useRouter } from 'next/navigation';
 
 
 
-export default function UserMasuk() {
+export default function UserMasuk( props : any ) {
   const { isLoaded, isSignedIn, user } = useUser();
+  const router = useRouter();
 
   // function desctructUser(usr : UserResource) {
   //   return {
@@ -40,8 +41,13 @@ export default function UserMasuk() {
     try {
 
      const response = await axios.post('/api/sign/create',values);
+     
      if (response.statusText === 'OK') {
-      toast.success('Succesful Log In');
+      if(props.userId) {
+        toast.success('Succesful Log In');
+        router.push(`/${props.userId}`)
+      }       
+
      } 
 
      
@@ -53,10 +59,9 @@ export default function UserMasuk() {
   }
 
   useEffect(() => {
-
     if(isSignedIn){
       const postData=desctructUser2(user);
-      console.log(postData)
+
       onSubmit(postData)
     }
   }, [])

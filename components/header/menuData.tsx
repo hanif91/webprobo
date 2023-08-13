@@ -15,7 +15,7 @@ const menuData: Menu[] = [
       {
         id: 21,
         title: "Tentang Kami",
-        path: "/about",
+        path: "/tentang",
         newTab: false,
       },
       {
@@ -34,7 +34,7 @@ const menuData: Menu[] = [
       {
         id: 31,
         title: "Pasang Baru",
-        path: "/about",
+        path: "/tentang",
         newTab: false,
       },
       {
@@ -72,13 +72,13 @@ const menuData: Menu[] = [
   {
     id: 5,
     title: "Dokumen Publik",
-    path: "/",
+    path: "/public-doc",
     newTab: false,
   },
   {
     id: 6,
     title: "Kontak Kami",
-    path: "/",
+    path: "/contact",
     newTab: false,
   },
 ];

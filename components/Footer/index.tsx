@@ -1,11 +1,31 @@
+'use client'
+
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+
 
 const Footer = () => {
+
+  const pathname = usePathname()
+  const [footerVisible, setfooterVisible] = useState(false);
+
+
+  useEffect(() => {
+    console.log(pathname)
+    if(pathname === "/sign-in" || pathname === "/sign-up") {
+      setfooterVisible(true)
+    } else {
+      setfooterVisible(false)
+    }
+  },[pathname]);
+
   return (
     <>
       <footer
-        className="wow fadeInUp relative z-10 bg-primary2 bg-opacity-[0.08] pt-7 md:pt-10 lg:pt-15"
+        className={`wow fadeInUp relative z-10 ${footerVisible ? "hidden" : "block"} bg-primary2 bg-opacity-[0.08] pt-7 md:pt-10 lg:pt-15`}
         data-wow-delay=".1s"
       >
         <div className="container">
@@ -14,14 +34,14 @@ const Footer = () => {
               <div className="mb-12 max-w-[360px] lg:mb-16">
                 <Link href="/" className="mb-8 inline-block">
                   <Image
-                    src="images/logo/nlogo-black.svg"
+                    src={`${origin}/images/logo/nlogo-black.svg`}
                     alt="logo"
                     className="w-full dark:hidden"
                     width={140}
                     height={30}
                   />
                   <Image
-                    src="images/logo/nlogo-white.svg"
+                    src={`${origin}/images/logo/nlogo-white.svg`}
                     alt="logo"
                     className="hidden w-full dark:block"
                     width={140}
